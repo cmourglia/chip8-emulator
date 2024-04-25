@@ -44,7 +44,12 @@ void fill_screen(SDL_Texture* texture) {
     SDL_UnlockTexture(texture);
 }
 
-int main(void) {
+int main(int argc, char** argv) {
+    if (argc != 2) {
+        printf("Usage: chip8 rom_file\n");
+        exit(1);
+    }
+
     i32 screen_width = 1280;
     i32 screen_height = 640;
 
@@ -65,7 +70,7 @@ int main(void) {
     SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
 
     chip8_init();
-    chip8_load_rom("roms/test_opcode.ch8");
+    chip8_load_rom(argv[1]);
 
     bool running = true;
     SDL_Event event;
